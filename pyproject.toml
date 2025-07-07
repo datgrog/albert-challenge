@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "albert-home-challenge"
+version = "0.1.0"
+description = ""
+authors = ["Antoine Guidis <antoine@spot.so>"]
+readme = "README.md"
+packages = [{include = "albert_home_challenge"}]
+
+[tool.taskipy.tasks]
+api = "gunicorn --bind 0.0.0.0:8080 src.app:app --threads 2 --reload"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "^3.1.1"
+gunicorn = "^23.0.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+ruff = "^0.12.2"
+mypy = "^1.16.1"
+taskipy = "^1.14.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins."poetry.plugin"]
+"taskipy" = "taskipy.plugin:TaskLoader"
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+select = ["E", "F", "B"]  # Basic errors, flakes, bug risks
