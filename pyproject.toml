@@ -8,6 +8,9 @@ packages = [{include = "albert_home_challenge"}]
 
 [tool.taskipy.tasks]
 api = "gunicorn --bind 0.0.0.0:8080 src.app:app --threads 2 --reload"
+lint = "ruff check src"
+format = "black src"
+test = "pytest -v"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -23,6 +26,7 @@ taskipy = "^1.14.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
 
 [tool.poetry.plugins."poetry.plugin"]
 "taskipy" = "taskipy.plugin:TaskLoader"
