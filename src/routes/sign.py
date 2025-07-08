@@ -6,7 +6,7 @@ import os
 import base64
 from webargs.flaskparser import use_kwargs
 from marshmallow import Schema, fields
-from src.exceptions import ForbiddenException, BadRequestException
+from src.exceptions import BadRequestException
 from typing import Any, Literal
 
 sign_blueprint = Blueprint("crypto_sign", __name__)
@@ -19,7 +19,7 @@ def _get_albert_secret():
     return base64.b64decode(secret)
 
 
-def _sign_payload(message):
+def _sign_payload(message: dict[str, Any]):
     canonical_payload = json.dumps(message, sort_keys=True, separators=(",", ":"))
     return hmac.new(
         _get_albert_secret(), canonical_payload.encode(), hashlib.sha256
@@ -33,7 +33,7 @@ def _verify_signature(message, request_signature):
     ).hexdigest()
 
     if hmac.compare_digest(expected_signature, request_signature) is False:
-        raise ForbiddenException("HMAC signature equality failed")
+        raise BadRequestException("HMAC signature equality failed")
 
 
 class SignatureSchema(Schema):

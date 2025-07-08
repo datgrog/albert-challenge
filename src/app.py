@@ -12,24 +12,20 @@ app.register_blueprint(encode_blueprint, url_prefix="/v0/crypto")
 app.register_blueprint(sign_blueprint, url_prefix="/v0/crypto")
 
 
-@app.errorhandler(BadRequestException)
-@app.errorhandler(422)
-@app.errorhandler(415)
 @app.errorhandler(400)
+@app.errorhandler(415)
+@app.errorhandler(422)
+@app.errorhandler(BadRequestException)
 def handle_bad_request(e):
-    return (
-        jsonify({"error": "bad_request", "message": str(e)}),
-        400,
-    )
+    message = getattr(e, "description", str(e))
+    return jsonify({"error": "bad_request", "message": message}), 400
 
 
-@app.errorhandler(ForbiddenException)
 @app.errorhandler(403)
-def forbidden(e):
-    return (
-        jsonify({"error": "forbidden", "message": str(e)}),
-        403,
-    )
+@app.errorhandler(ForbiddenException)
+def handle_forbidden(e):
+    message = getattr(e, "description", str(e))
+    return jsonify({"error": "forbidden", "message": message}), 403
 
 
 @app.errorhandler(500)

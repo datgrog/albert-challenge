@@ -13,7 +13,7 @@ def client():
 def test_verify_incorrect_payload(client):
     response = client.post("/v0/crypto/verify", json={})
 
-    assert response.status_code == 422
+    assert response.status_code == 400
     assert response.get_json()["error"] == "bad_request"
 
 
@@ -24,8 +24,8 @@ def test_verify_invalid_signature(client):
     }
     response = client.post("/v0/crypto/verify", json=payload)
 
-    assert response.status_code == 403
-    assert response.get_json()["error"] == "forbidden"
+    assert response.status_code == 400
+    assert response.get_json()["error"] == "bad_request"
 
 
 def test_verify_valid_signature(client):
