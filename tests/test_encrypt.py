@@ -12,6 +12,7 @@ def client():
 
 def test_encrypt_empty_json(client):
     response = client.post("/v0/crypto/encrypt", json={})
+
     assert response.status_code == 200
     assert response.is_json
     assert response.get_json() == {}
@@ -23,7 +24,6 @@ def test_encrypt_common_json(client):
         "age": "OTk5",
         "contact": "eyJlbWFpbCI6ICJoZWxsb0BhbGJlcnQuY29tIiwgInBob25lIjogIisxLTgwMC1BTEJFUlQtNDIifQ==",
     }
-
     payload = {
         "name": "Albert",
         "age": 999,
@@ -31,6 +31,7 @@ def test_encrypt_common_json(client):
     }
 
     response = client.post("/v0/crypto/encrypt", json=payload)
+
     assert response.status_code == 200
     assert response.get_json() == expected_common_json
 
@@ -45,7 +46,6 @@ def test_encrypt_regression(client):
         "name": "IkFsYmVydCI=",
         "skills": "W3sibGV2ZWwiOiAiZXhwZXJ0IiwgIm5hbWUiOiAiTmF0dXJhbCBMYW5ndWFnZSBQcm9jZXNzaW5nIiwgInllYXJzX2V4cGVyaWVuY2UiOiAyfSwgeyJsZXZlbCI6ICJhZHZhbmNlZCIsICJuYW1lIjogIkRhdGEgQW5hbHlzaXMiLCAieWVhcnNfZXhwZXJpZW5jZSI6IDEuNX0sIHsibGV2ZWwiOiAibWFzdGVyIiwgIm5hbWUiOiAiRnJpZW5kbHkgQ29udmVyc2F0aW9uIiwgInllYXJzX2V4cGVyaWVuY2UiOiAzfV0=",
     }
-
     payload = {
         "name": "Albert",
         "description": "Meet Albert, the cybersecurity companion that drives better security in your team.",
@@ -81,5 +81,6 @@ def test_encrypt_regression(client):
     }
 
     response = client.post("/v0/crypto/encrypt", json=payload)
+
     assert response.status_code == 200
     assert response.get_json() == expected_common_json

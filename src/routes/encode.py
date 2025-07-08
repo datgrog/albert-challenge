@@ -3,7 +3,7 @@ import json
 import base64
 from typing import Any
 
-encode_blueprint = Blueprint("crypto", __name__)
+encode_blueprint = Blueprint("crypto_encode", __name__)
 
 
 def _encrypt(raw_value: Any) -> str:
@@ -25,8 +25,7 @@ def _decrypt(encoded_value: str) -> Any:
 
 @encode_blueprint.route("/encrypt", methods=["POST"])
 def encrypt() -> Response:
-    data: dict[str, Any] | None = request.get_json()
-    assert data is not None
+    data: dict[str, Any] = request.get_json()
 
     encrypted = {}
     for key, value in data.items():
@@ -36,9 +35,8 @@ def encrypt() -> Response:
 
 
 @encode_blueprint.route("/decrypt", methods=["POST"])
-def decrypt():
-    data = request.json
-    assert data is not None
+def decrypt() -> Response:
+    data: dict[str, Any] = request.get_json()
 
     decrypted = {}
     for key, value in data.items():

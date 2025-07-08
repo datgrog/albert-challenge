@@ -12,6 +12,7 @@ def client():
 
 def test_decrypt_empty_json(client):
     response = client.post("/v0/crypto/decrypt", json={})
+
     assert response.status_code == 200
     assert response.is_json
     assert response.get_json() == {}
@@ -31,6 +32,7 @@ def test_decrypt_common_json(client):
     }
 
     response = client.post("/v0/crypto/decrypt", json=payload)
+
     assert response.status_code == 200
     assert response.get_json() == expected_common_json
 
@@ -49,6 +51,7 @@ def test_decrypt_common_json_clear_number(client):
     }
 
     response = client.post("/v0/crypto/decrypt", json=payload)
+
     assert response.status_code == 200
     assert response.get_json() == expected_common_json
 
@@ -67,6 +70,7 @@ def test_decrypt_common_json_clear_dict(client):
     }
 
     response = client.post("/v0/crypto/decrypt", json=payload)
+
     assert response.status_code == 200
     assert response.get_json() == expected_common_json
 
@@ -105,7 +109,6 @@ def test_decrypt_regression(client):
             "solving puzzles",
         ],
     }
-
     payload = {
         "age": "OTk5",
         "appearance": "eyJhY2Nlc3NvcmllcyI6IHsiYmFja3BhY2siOiB7ImNvbnRlbnRzIjogWyJVU0Igc3RpY2siLCAibWluaSBkcm9uZSIsICJlbmVyZ3kgYmFyIl19LCAiaGVhZHNldCI6ICJub2lzZS1jYW5jZWxsaW5nIiwgInNtYXJ0d2F0Y2giOiAicXVhbnR1bSBlZGl0aW9uIn0sICJmZWF0dXJlcyI6IFsiYmlnIGN1cmlvdXMgZXllcyIsICJnbGFzc2VzIiwgIm1vdXN0YWNoZSJdLCAiaGVpZ2h0X2NtIjogNDJ9",
@@ -117,5 +120,6 @@ def test_decrypt_regression(client):
     }
 
     response = client.post("/v0/crypto/decrypt", json=payload)
+
     assert response.status_code == 200
     assert response.get_json() == expected_common_json
