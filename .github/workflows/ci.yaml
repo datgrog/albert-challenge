@@ -8,7 +8,7 @@ on:
 
 jobs:
   setup_job:
-    uses: ./.github/workflows/setup-python-poetry.yml
+    uses: ./.github/workflows/base.yml
 
   test:
     needs: setup_job
