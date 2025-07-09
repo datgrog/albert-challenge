@@ -1,7 +1,7 @@
 import base64
 import json
 from typing import Any
-from src.crypto.encoder import Encoder
+from .encoder import Encoder
 
 
 class Base64Encoder(Encoder):
