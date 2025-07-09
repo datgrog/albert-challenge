@@ -1,3 +1,5 @@
+[![CI](https://github.com/datgrog/albert-challenge/actions/workflows/ci.yaml/badge.svg)](https://github.com/datgrog/albert-challenge/actions/workflows/ci.yaml)
+
 # 🔐 Albert Home Challenge
 
 A small Python API for secure JSON encryption and digital signature verification.
