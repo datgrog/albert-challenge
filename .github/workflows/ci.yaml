@@ -7,23 +7,50 @@ on:
     branches: [ main ]
 
 jobs:
-  setup_job:
-    uses: ./.github/workflows/base.yml
-
-  test:
-    needs: setup_job
-    runs-on: ubuntu-latest
-    steps:
-      - run: poetry run task test
-
   lint:
-    needs: setup_job
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 2.5.1            # use your desired Poetry version
+          virtualenvs-create: false # install dependencies globally (no venv)
+      - run: |
+          poetry config virtualenvs.create false
+          poetry install --no-root --no-interaction --no-ansi
       - run: poetry run task lint
 
   format:
-    needs: setup_job
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 2.5.1            # use your desired Poetry version
+          virtualenvs-create: false # install dependencies globally (no venv)
+      - run: |
+          poetry config virtualenvs.create false
+          poetry install --no-root --no-interaction --no-ansi
       - run: poetry run task format
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 2.5.1            # use your desired Poetry version
+          virtualenvs-create: false # install dependencies globally (no venv)
+      - run: |
+          poetry config virtualenvs.create false
+          poetry install --no-root --no-interaction --no-ansi
+      - run: poetry run task test
