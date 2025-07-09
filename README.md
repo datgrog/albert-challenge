@@ -1,7 +1,5 @@
 # 🔐 Albert Home Challenge
 
----
-
 A small Python API for secure JSON encryption and digital signature verification.
 
 Built with:
