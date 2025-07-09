@@ -25,11 +25,8 @@ openssl rand -base64 32
 # set `ALBERT_HMAC_SECRET` with openssl previous command
 ```
 
-## Build
-docker build -t albert_challenge .
-
-## Run and start API
-docker run --rm -it -p 8080:8080 albert_challenge bash
+Build: `docker build -t albert_challenge .`
+Run and start API: `docker run --rm -it -p 8080:8080 albert_challenge bash`
 then
 ```bash
 poetry run task api
