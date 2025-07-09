@@ -13,9 +13,9 @@ Built with:
 - .env for *albert* secret 👨‍🦳🤐
 - **Black**, **Ruff**, **Mypy**, and 🧪 **Pytest** for code quality (Prettifier, Linter, Static Type Checking and testing)
 
----
+## Getting Started
 
-## **Prerequisites**
+### Prerequisites
 
 > Requires Python 3.10+
 > 
@@ -45,14 +45,12 @@ openssl rand -base64 32
 # set `ALBERT_HMAC_SECRET` with openssl previous command
 ```
 
-## Installation
+### Installation
 
 ```bash
 # Install project dependencies
 poetry install
 ```
-
----
 
 ## Commands
 
@@ -86,8 +84,6 @@ task test
 task lint
 task format
 ```
-
----
 
 ## 🔁 Endpoints
 
@@ -153,7 +149,6 @@ curl -X POST http://localhost:8080/v0/crypto/verify \
   }'
 
 ```
----
 
 ## 📁 Project Structure
 
