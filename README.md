@@ -13,6 +13,29 @@ Built with:
 
 ## Getting Started
 
+### Using Docker
+
+> Require `ALBERT_HMAC_SECRET` in .env
+>
+
+```bash
+# 💡 Tips
+openssl rand -base64 32
+# rename `.env.example` to `.env`
+# set `ALBERT_HMAC_SECRET` with openssl previous command
+```
+
+## Build
+docker build -t albert_challenge .
+
+## Run and start API
+docker run --rm -it -p 8080:8080 albert_challenge bash
+then
+```bash
+poetry run task api
+poetry run task test
+```
+
 ### Prerequisites
 
 > Requires Python 3.10+
