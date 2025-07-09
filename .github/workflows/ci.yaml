@@ -16,8 +16,8 @@ jobs:
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 2.5.1            # use your desired Poetry version
-          virtualenvs-create: false # install dependencies globally (no venv)
+          version: 2.1.3
+          virtualenvs-create: false
       - run: |
           poetry config virtualenvs.create false
           poetry install --no-root --no-interaction --no-ansi
@@ -32,8 +32,8 @@ jobs:
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 2.5.1            # use your desired Poetry version
-          virtualenvs-create: false # install dependencies globally (no venv)
+          version: 2.1.3
+          virtualenvs-create: false
       - run: |
           poetry config virtualenvs.create false
           poetry install --no-root --no-interaction --no-ansi
@@ -48,8 +48,8 @@ jobs:
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
         with:
-          version: 2.5.1            # use your desired Poetry version
-          virtualenvs-create: false # install dependencies globally (no venv)
+          version: 2.1.3
+          virtualenvs-create: false
       - run: |
           poetry config virtualenvs.create false
           poetry install --no-root --no-interaction --no-ansi
