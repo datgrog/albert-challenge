@@ -7,31 +7,23 @@ on:
     branches: [ main ]
 
 jobs:
+  setup_job:
+    uses: ./.github/workflows/setup-python-poetry.yml
+
   test:
+    needs: setup_job
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - run: poetry run task test
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+  lint:
+    needs: setup_job
+    runs-on: ubuntu-latest
+    steps:
+      - run: poetry run task lint
 
-    - name: Install Poetry
-      run: pip install poetry
-
-    - name: Install dependencies
-      run: |
-        poetry config virtualenvs.create false
-        poetry install --no-root --no-interaction --no-ansi
-
-    - name: Run linter
-      run: poetry run task lint
-
-    - name: Run formatter
-      run: poetry run task format
-
-    - name: Run tests
-      run: poetry run task test
+  format:
+    needs: setup_job
+    runs-on: ubuntu-latest
+    steps:
+      - run: poetry run task format
