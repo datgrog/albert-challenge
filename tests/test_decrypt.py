@@ -1,8 +1,5 @@
 import pytest
 from src.app import app
-import base64
-
-# TODO: UPDATE WITH ENCODING PROVIDER
 
 
 @pytest.fixture

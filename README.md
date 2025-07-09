@@ -83,14 +83,6 @@ poetry install
 poetry run task api # Start the API
 ```
 
-Or, enter the dev shell first:
-
-```bash
-poetry shell
-task api
-# ... as above
-```
-
 API is now running on: [http://localhost:8080](http://localhost:8080/)
 
 ### Dev Commands
@@ -132,7 +124,7 @@ curl -X POST http://localhost:8080/v0/crypto/decrypt \
   -H "Content-Type: application/json" \
   -d '{
     "name": "IkFsYmVydCI=",
-    "age": "OTk5",
+    "age": "999",
     "contact": "eyJlbWFpbCI6ICJoZWxsb0BhbGJlcnQuY29tIiwgInBob25lIjogIisxLTgwMC1BTEJFUlQtNDIifQ=="
   }'
 
