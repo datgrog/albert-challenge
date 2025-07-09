@@ -12,6 +12,7 @@ Built with:
 - **Taskipy** for dev ergonomics
 - .env for *albert* secret 👨‍🦳🤐
 - **Black**, **Ruff**, **Mypy**, and 🧪 **Pytest** for code quality (Prettifier, Linter, Static Type Checking and testing)
+- Add Github actions for CI (Lint, Format, Test)
 
 ## Getting Started
 
