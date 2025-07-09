@@ -1,10 +1,12 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from flask import Flask, jsonify
 from src.routes.encode import encode_blueprint
 from src.routes.sign import sign_blueprint
 from src.exceptions import BadRequestException, ForbiddenException
-from dotenv import load_dotenv
 
-load_dotenv()
 
 app = Flask(__name__)
 

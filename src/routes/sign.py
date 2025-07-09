@@ -8,32 +8,9 @@ from webargs.flaskparser import use_kwargs
 from marshmallow import Schema, fields
 from src.exceptions import BadRequestException
 from typing import Any, Literal
+from src.crypto import crypto_service
 
 sign_blueprint = Blueprint("crypto_sign", __name__)
-
-
-def _get_albert_secret():
-    secret = os.getenv("ALBERT_HMAC_SECRET")
-    assert secret is not None
-
-    return base64.b64decode(secret)
-
-
-def _sign_payload(message: dict[str, Any]):
-    canonical_payload = json.dumps(message, sort_keys=True, separators=(",", ":"))
-    return hmac.new(
-        _get_albert_secret(), canonical_payload.encode(), hashlib.sha256
-    ).hexdigest()
-
-
-def _verify_signature(message, request_signature):
-    canonical_payload = json.dumps(message, sort_keys=True, separators=(",", ":"))
-    expected_signature = hmac.new(
-        _get_albert_secret(), bytes(canonical_payload, "utf-8"), hashlib.sha256
-    ).hexdigest()
-
-    if hmac.compare_digest(expected_signature, request_signature) is False:
-        raise BadRequestException("HMAC signature equality failed")
 
 
 class SignatureSchema(Schema):
@@ -48,7 +25,7 @@ def sign() -> Response:
     if not data:
         raise BadRequestException("Nothing to sign")
 
-    signature = _sign_payload(data)
+    signature = crypto_service.sign(data)
 
     return jsonify({"signature": signature})
 
@@ -56,6 +33,7 @@ def sign() -> Response:
 @sign_blueprint.route("/verify", methods=["POST"])
 @use_kwargs(SignatureSchema, location="json")
 def verify(signature: str, data: dict[str, Any]) -> tuple[Response, Literal[204]]:
-    _verify_signature(data, signature)
+    if crypto_service.verify(data, signature) is False:
+        raise BadRequestException("HMAC signature equality failed")
 
     return jsonify({}), 204
