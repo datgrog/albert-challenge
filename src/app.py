@@ -1,7 +1,4 @@
-from dotenv import load_dotenv
-
-load_dotenv()
-
+import src.config # noqa: F401
 from flask import Flask, jsonify
 from src.routes.encode import encode_blueprint
 from src.routes.sign import sign_blueprint

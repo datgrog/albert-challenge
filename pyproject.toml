@@ -38,7 +38,7 @@ target-version = ["py311"]
 [tool.ruff]
 line-length = 88
 target-version = "py311"
-select = ["E", "F", "B"]  # Basic errors, flakes, bug risks
+lint.select = ["E", "F", "B"]  # Basic errors, flakes, bug risks
 
 [build-system]
 requires = ["poetry-core"]
