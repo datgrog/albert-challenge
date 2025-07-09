@@ -26,7 +26,9 @@ openssl rand -base64 32
 ```
 
 Build: `docker build -t albert_challenge .`
+
 Run and start API: `docker run --rm -it -p 8080:8080 albert_challenge bash`
+
 then
 ```bash
 poetry run task api
